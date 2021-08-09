@@ -11,7 +11,6 @@ interaction_images = {
     'agent': 'images/agent.png',
     'orange': 'images/orange.png',
     'wall': 'images/wall.png'
-
 }
 
 

@@ -112,7 +112,9 @@ class Maze(tk.Tk, object):
         #print('reset is done')
         return self.canvas.coords(self.agent)  # return observation
 
-    
+    def getFruitCoord(self):
+        return list(map(int, self.canvas.coords(self.fruit)))
+
     def step(self, action):
         s = self.canvas.coords(self.agent) 
         base_action = np.array([0, 0])
