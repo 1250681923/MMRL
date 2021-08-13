@@ -6,7 +6,7 @@ import torch.nn.functional as F
 #参数
 BATCH_SIZE = 32
 LR = 0.01                   # 学习率
-EPSILON = 0.9               # 最优选择动作百分比(有0.9的几率是最大选择，还有0.1是随机选择，增加网络能学到的Q值)
+              # 最优选择动作百分比(有0.9的几率是最大选择，还有0.1是随机选择，增加网络能学到的Q值)
 GAMMA = 0.9                 # 奖励递减参数（衰减作用，如果没有奖励值r=0，则衰减Q值）
 TARGET_REPLACE_ITER = 100   # Q 现实网络的更新频率100次循环更新一次
 MEMORY_CAPACITY = 2000      # 记忆库大小
@@ -43,7 +43,7 @@ class DQN(object):
         self.optimizer = torch.optim.Adam(self.eval_net.parameters(), lr=LR) # torch 的优化器
         self.loss_func = nn.MSELoss()   # 误差公式
 
-    def choose_action(self, x):
+    def choose_action(self, x, EPSILON):
         x = torch.unsqueeze(torch.FloatTensor(x), 0)
         # 这里只输入一个 sample,x为场景
         if np.random.uniform() < EPSILON:   # 选最优动作

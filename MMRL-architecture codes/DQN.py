@@ -42,6 +42,7 @@ def update():
     print("--- Interaction starts ---")
     #400步
     study = 1
+    EPSILON = 0.9
     for i_episode in range(EPISODES):
         step = 1
         #print(i_episode,'epoch')
@@ -71,7 +72,7 @@ def update():
         s = trans_torch(s)
         while True:
             #env.display()   # 显示实验动画
-            a = dqn.choose_action(s) #选择动作
+            a = dqn.choose_action(s,EPSILON) #选择动作
             # 选动作, 得到环境反馈
             observation_,r,done = env.step(a)
 
@@ -113,6 +114,7 @@ def update():
                     print('2000经验池')
                     study=0
                 dqn.learn() # 记忆库满了就进行学习
+                EPSILON = 1.0
             step += 1
             s = s_
         print('The episode: %d,  with %d steps.' % (i_episode, step))
